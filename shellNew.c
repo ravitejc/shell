@@ -122,7 +122,7 @@ getcmd(char *buf, int nbuf)
 }
 
 void multiCommandCheck(char* buf, char*nexbuf){
-	int   it, lit, flag = 0;
+	int it,t, lit, flag = 0;
 	for(it =0; it < BUF_SIZE; it++){
 		if(buf[it] == ';'){
 			flag = 1;
@@ -136,7 +136,7 @@ void multiCommandCheck(char* buf, char*nexbuf){
 			buf[it] = ' ';
 		//	printf("command before ; is %s with size %d . size of is %ld and removing it is %s\n", localBuf, it, sizeof(localBuf), buf);
 			//endPoint = localEndPoint;  
-			for(int t=0; t<100;t++){
+			for(t=0; t<100;t++){
 			nexbuf[t] = buf[t];
 			if(t < it)
 			buf[t] = localBuf[t];
@@ -158,7 +158,7 @@ main(void)
   static char buf[100];
   static char nexbuf[100];
   // int fd;
-  int r, z;
+  int r, z, t;
   z = getcmd(buf, sizeof(buf));
 
   // Read and run input commands.
@@ -175,7 +175,7 @@ main(void)
 	}
 	else{
 	//	printf("In else as nexbuf is %s \n", nexbuf);
-		for(int t=0; t<100;t++)
+		for(t=0; t<100;t++)
 			buf[t] = nexbuf[t];
 		memset(nexbuf, 0, sizeof(nexbuf));
 		multiCommandCheck(buf, nexbuf);
